@@ -69,3 +69,82 @@
 	@import 'layout/footer';
 	@import 'layout/wrapper';
 	@import 'layout/menu';
+
+
+
+//	Route Component
+	.route-container{
+		width: 100%;
+		display: flex!important;
+		justify-content: space-between;
+		border-bottom: 1px solid white ;
+		padding: 1em;
+		margin: 0 auto;
+		cursor: pointer;		
+	}
+	.route-container .route-name-container a{
+		font-size: 30px;
+		margin-right: 15px;
+	}
+	 .route-find-out-more , .route-name-container{
+		display: flex;
+		align-items: center;
+	}
+	.enpoint-container{
+		display: flex;
+		border: 0.1px solid rgba(255, 255, 255, 0.774) ;
+		margin: 1em;
+		padding: 10px;
+		align-items: center;
+		cursor: pointer;
+	}
+	.enpoint-container button{
+		width: 10%;
+	}
+	.enpoint-container button ,.enpoint-container h3 ,.enpoint-container p{
+		margin-right: 1em;
+		margin-bottom: initial;
+		
+	}
+
+	.endpoint-example-cointainer{
+		margin: 0 auto;
+		width: 90%;
+		border: 1px solid white;
+		padding: 1em;
+	}
+	.enpoint-parameters{
+		width: 50%;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.endpoint-example-curl , .endpoint-example-url{
+		word-break: break-all;
+	}
+	.endpoint-example-curl {
+		margin-top: 2em;
+	
+	}
+	.example-body{
+		margin-bottom: 1em;
+	}
+	.example-try-buttons button{
+		margin:1em
+	}
+    .endpoint-example-response {
+		max-width: 100%;
+		overflow-x: auto;
+	}
+	.example-clear-button{
+		margin-top: 1em;
+		
+	}
+	.route-container-collapsible{
+		position: relative;
+		transition-property: height;
+		transition-duration: 4s;
+		transition-delay: 2s;
+		font-size: 14px;
+	}
+
