@@ -8,7 +8,8 @@ import '../../assets/scss/main.scss'
 import JSONPretty from 'react-json-pretty'
 import fetchToCurl from 'fetch-to-curl'
 
-const SERVER = 'https://api.fullstack.cash'
+// const SERVER = 'https://api.fullstack.cash'
+const SERVER = `${process.env.SERVER}`
 
 let _this
 
@@ -322,7 +323,7 @@ class Example extends React.Component {
     if (_this.props.data.parameters) {
       parameters = _this.props.data.parameters
     }
-    
+
     _this.setState({
       requestResult: '',
       curl: '',
