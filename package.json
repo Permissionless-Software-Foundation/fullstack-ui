@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Chris Troutner <chris.troutner@gmail.com>",
   "dependencies": {
+    "@material-ui/core": "^4.9.9",
     "fetch-to-curl": "^0.3.0",
     "gatsby": "^2.3.25",
     "gatsby-plugin-ipfs": "^2.0.2",

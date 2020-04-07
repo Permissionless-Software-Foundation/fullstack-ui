@@ -56,7 +56,7 @@
         "detailedDescription": "Returns an object with details for a single transaction.",
         "endpoint": "/v3/blockbook/tx/",
         "parameters": "6181c669614fa18039a19b23eb06806bfece1f7514ab457c3bb82a40fe171a6d",
-        "parametersName": "Address",
+        "parametersName": "Transaction ID",
         "parameterDescription": "Transaction ID"
       },
       {
@@ -64,7 +64,7 @@
         "shortDescription": "Get details for an array of transactions.",
         "detailedDescription": "Return details for an array of transactions. Limited to 20 transactions per request.",
         "endpoint": "/v3/blockbook/tx",
-        "parametersName": "Address",
+        "parametersName": "Transaction ID",
         "parameterDescription": "Array of TXIDs",
         "body": {
           "txids": [

@@ -134,7 +134,9 @@
 	}
     .endpoint-example-response {
 		max-width: 100%;
-		overflow-x: auto;
+		overflow: auto;
+		max-height: 60vh;
+		min-height: 400px;
 	}
 	.example-clear-button{
 		margin-top: 1em;
@@ -146,6 +148,9 @@
 		transition-duration: 4s;
 		transition-delay: 2s;
 		font-size: 14px;
+	}
+	.circular-progress-container{
+		text-align: center;
 	}
 
 	/* Footer */

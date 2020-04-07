@@ -8,8 +8,11 @@ import '../../assets/scss/main.scss'
 import JSONPretty from 'react-json-pretty'
 import fetchToCurl from 'fetch-to-curl'
 
-// const SERVER = 'https://api.fullstack.cash'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const SERVER = `${process.env.SERVER}`
+
+
 
 let _this
 
@@ -30,6 +33,8 @@ class Example extends React.Component {
       requestUrl: '',
       responseCode: '',
       isTrayIt: false,
+      inFetch: false
+
     }
 
     _this = this
@@ -101,24 +106,24 @@ class Example extends React.Component {
           {!_this.state.requestBody ? (
             ''
           ) : (
-            <div className="example-body">
-              <p>
-                <b>Example Body:</b>
-              </p>
-              {!_this.state.isTrayIt ? (
-                <JSONPretty id="json-pretty" data={_this.state.requestBody} />
-              ) : (
-                <textarea
-                  name="requestBody"
-                  id="requestBody"
-                  placeholder="Enter your data"
-                  rows="4"
-                  defaultValue={JSON.stringify(_this.state.requestBody)}
-                  onChange={_this.handleUpdate}
-                />
-              )}
-            </div>
-          )}
+              <div className="example-body">
+                <p>
+                  <b>Example Body:</b>
+                </p>
+                {!_this.state.isTrayIt ? (
+                  <JSONPretty id="json-pretty" data={_this.state.requestBody} />
+                ) : (
+                    <textarea
+                      name="requestBody"
+                      id="requestBody"
+                      placeholder="Enter your data"
+                      rows="4"
+                      defaultValue={JSON.stringify(_this.state.requestBody)}
+                      onChange={_this.handleUpdate}
+                    />
+                  )}
+              </div>
+            )}
           {_this.state.parameters && _this.state.isTrayIt ? (
             <div className="example-body">
               <p>
@@ -134,16 +139,22 @@ class Example extends React.Component {
               />
             </div>
           ) : (
-            ''
-          )}
+              ''
+            )}
           {!_this.state.isTrayIt ? (
             <button onClick={_this.tryItOut}>Try it Out</button>
           ) : (
-            <div className="example-try-buttons">
-              <button onClick={_this.tryItOut}>Cancel</button>
-              <button onClick={_this.startRequest}>Execute</button>
+              <div className="example-try-buttons">
+                <button onClick={_this.tryItOut}>Cancel</button>
+                <button onClick={_this.startRequest}>Execute</button>
+              </div>
+            )}
+          {
+            _this.state.inFetch &&
+            <div className="circular-progress-container">
+              <CircularProgress />
             </div>
-          )}
+          }
 
           {_this.state.curl ? (
             <>
@@ -153,8 +164,8 @@ class Example extends React.Component {
               </div>
             </>
           ) : (
-            ''
-          )}
+              ''
+            )}
           {_this.state.requestUrl ? (
             <>
               <div className="endpoint-example-url">
@@ -163,8 +174,8 @@ class Example extends React.Component {
               </div>
             </>
           ) : (
-            ''
-          )}
+              ''
+            )}
           {_this.state.responseCode ? (
             <>
               <div className="endpoint-example-url">
@@ -173,8 +184,8 @@ class Example extends React.Component {
               </div>
             </>
           ) : (
-            ''
-          )}
+              ''
+            )}
           {_this.state.requestResult ? (
             <>
               <div className="endpoint-example-response">
@@ -193,8 +204,8 @@ class Example extends React.Component {
               </button>
             </>
           ) : (
-            ''
-          )}
+              ''
+            )}
         </div>
       </>
     )
@@ -214,19 +225,30 @@ class Example extends React.Component {
     })
   }
 
-  startRequest() {
+  async startRequest() {
     // Validates the type of request
-    if (
-      _this.state.endpointType === 'get' ||
-      _this.state.endpointType === 'GET'
-    ) {
-      _this.requestGET()
-    } else if (
-      _this.state.endpointType === 'post' ||
-      _this.state.endpointType === 'POST'
-    ) {
-      _this.requestPOST()
+    _this.setState({
+      inFetch: true
+    })
+    try {
+      if (
+        _this.state.endpointType === 'get' ||
+        _this.state.endpointType === 'GET'
+      ) {
+        await _this.requestGET()
+      } else if (
+        _this.state.endpointType === 'post' ||
+        _this.state.endpointType === 'POST'
+      ) {
+        await _this.requestPOST()
+      }
+    } catch (error) {
+      console.log("ERROR: ", error)
     }
+
+    _this.setState({
+      inFetch: false
+    })
   }
 
   // POST Request
@@ -238,7 +260,7 @@ class Example extends React.Component {
     // To parse the body to a json object
     try {
       body = JSON.parse(_this.state.requestBody)
-    } catch (error) {}
+    } catch (error) { }
     // POST request
     try {
       let code = ''
@@ -253,11 +275,11 @@ class Example extends React.Component {
       }
       console.log('options: ', options)
       const result = await fetch(endpoint, options)
-        .then(function(response) {
+        .then(function (response) {
           code = response.status
           return response.text()
         })
-        .then(function(data) {
+        .then(function (data) {
           console.log(data) // this will be a string
           return data
         })
@@ -271,7 +293,7 @@ class Example extends React.Component {
 
       return result
     } catch (err) {
-      return false
+      return err
     }
   }
 
@@ -290,11 +312,11 @@ class Example extends React.Component {
       }
 
       const result = await fetch(endpoint, options)
-        .then(function(response) {
+        .then(function (response) {
           code = response.status
           return response.text()
         })
-        .then(function(data) {
+        .then(function (data) {
           console.log(data) // this will be a string
           return data
         })
