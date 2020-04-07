@@ -1,22 +1,41 @@
-/* eslint-disable */
-
 import React from 'react'
 
-const Footer = (props) => (
-    <footer id="footer">
-        <div className="inner">
-            <ul className="icons">
-                <li><a href="#" className="icon alt fa-twitter"><span className="label">Twitter</span></a></li>
-                <li><a href="#" className="icon alt fa-facebook"><span className="label">Facebook</span></a></li>
-                <li><a href="#" className="icon alt fa-instagram"><span className="label">Instagram</span></a></li>
-                <li><a href="#" className="icon alt fa-github"><span className="label">GitHub</span></a></li>
-                <li><a href="#" className="icon alt fa-linkedin"><span className="label">LinkedIn</span></a></li>
-            </ul>
-            <ul className="copyright">
-                <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-            </ul>
-        </div>
-    </footer>
-)
+class Footer extends React.Component {
+  render() {
+    return (
+      <section id="footer">
+        <ul className="icons">
+          <li>
+            <a href="https://t.me/permissionless_software" className="icon alt fa-telegram">
+              <span className="label">Telegram</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/Permissionless-Software-Foundation"
+              target="_blank"
+              className="icon alt fa-github"
+              rel="noopener noreferrer"
+            >
+              <span className="label">GitHub</span>
+            </a>
+          </li>
+          <li>
+            <a href="http://fullstack.cash/contact/" className="icon alt fa-envelope">
+              <span className="label">Email</span>
+            </a>
+          </li>
+        </ul>
+        <ul className="copyright">
+          <li>MIT licensed <a href="https://github.com/Permissionless-Software-Foundation/fullstack-ui" target="_blank" rel="noopener noreferrer">source code</a></li>
+          <li>
+            An initiative of
+            the <a href="https://psfoundation.cash/" target="_blank" rel="noopener noreferrer">Permissionless Software Foundation</a>.
+          </li>
+        </ul>
+      </section>
+    )
+  }
+}
 
 export default Footer
